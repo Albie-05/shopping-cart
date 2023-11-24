@@ -1,10 +1,10 @@
-var Product = require("../product");
+var Product = require('../product');
 
 var mongoose = require("mongoose");
 //mongodb+srv://admin:<password>@cluster0.x0bskjb.mongodb.net/
 
 //mongoose.connect("localhost:27017/shopping");
-mongoose.connect('mongodb+srv://admin:password12345#@cluster0.x0bskjb.mongodb.net/shopping')
+mongoose.connect("mongodb://localhost:27017/shopping");
 var products = [
   new Product({
     ImagePath:
@@ -23,13 +23,14 @@ var products = [
 ];
 
 for (var i = 0; i < products.length; i++) {
-  products[i].save(function(err, result) {
-     done++;
-     if (done === products.length) {
-        exists();
-     }
-  }
-    );
+  products[i].save(function (err, result) {
+    done++;
+    if (done === products.length) {
+      exit();
+    }
+  });
 }
 
-mongoose.disconnect();
+function exit() {
+  mongoose.disconnect();
+}
